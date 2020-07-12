@@ -1,0 +1,77 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
+// Bootstrap
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+
+// Import custom scss
+@import 'auth';
+
+//Colors hex code
+//grey - primary: #424242     dark: #1b1b1b     light: #6d6d6d      lighter: #bdbdbd
+//blue - primary: #37474f     dark: #102027     light: #62727b     lighter:
+//blue grey dark prim: #455A64      light prim: #CFD8DC     primary: #607D8B      accent: #03A9F4   separator: #BDBDBD
+
+body {
+  display: flex;
+}
+
+.main-content {
+  padding: 48px !important;
+  min-height: calc(100vh - 72px);
+  background: #FFF;
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-blue {
+  color: #FFF;
+  background: #2196f3;
+}
+
+
+.light-link {
+  color: #FFF;
+  text-decoration: none;
+  &:hover {
+    color: rgba(255, 255, 255, 0.8)
+  }
+}
+
+.eventsRight{
+  background:#607D8B;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.eventsTable{
+  color: #FFFFFF !important;
+}
+
+.buttonsRow{
+  border-top: #BDBDBD solid 2px;
+}
+
+.room{
+  img {
+    max-height: 30px;
+  }
+}
+
+.font-weight-normal {
+  th {
+    font-weight: 400!important;
+  }
+}
+
+.noMargin {
+  margin: 0px !important;
+}

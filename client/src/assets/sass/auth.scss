@@ -1,0 +1,22 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  input, select {
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+  }
+  .form-help {
+    a {
+      color: #000 !important;
+      text-decoration: none !important;
+      &:hover {
+        color: rgba(0,0,0, 0.7)!important;
+      }
+    }
+    font-size: 0.8rem;
+  }
+  .btn-primary {
+    background: #2196f3;
+  }
+}
