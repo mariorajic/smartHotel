@@ -4,8 +4,8 @@
       <b-col>
         <h4 class="py-3">
           Latest events - <span v-if="room">Room {{ room.number }}</span>
-          <span v-else-if="floor">Floor {{ floor.number }}</span>
-          <span v-else>All rooms</span>
+          <span v-else-if="floor">Floor {{floor.number}}</span>
+          <span v-else>Overview</span>
         </h4>
       </b-col>
     </b-row>
@@ -118,7 +118,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.floor = null;
-            this.room = response.data.data[0];
+            this.room = response.data.data;
           }
         });
     },
@@ -143,20 +143,25 @@ export default {
     let self = this;
     this.getSosEvents();
     this.$root.$on("refreshEvents", (refreshFor) => {
-      this.getSosEvents();
       if (refreshFor === "floors") {
         let self = this;
+        clearInterval(this.interval);
         this.getAllEvents();
         this.interval = setInterval(function() {
           self.getAllEvents();
-          self.getSosEvents();
-        }, 5000);
+        }, 2000);
       } else if (refreshFor === "floor") {
         clearInterval(this.interval);
         this.getFloorEvents();
+        this.interval = setInterval(function() {
+          self.getFloorEvents();
+        }, 2000);
       } else if (refreshFor === "room") {
         clearInterval(this.interval);
         this.getRoomEvents();
+        this.interval = setInterval(function() {
+          self.getRoomEvents();
+        }, 2000);
       } else {
         console.log("No location parameter sent");
       }

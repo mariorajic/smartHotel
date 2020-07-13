@@ -111,12 +111,13 @@
           </b-btn>
           <b-btn
             v-else
+            disabled
             size="lg"
-            variant="success"
+            variant="danger"
             class="w-100"
             @click.prevent="sosActivate"
           >
-            Deactivate SOS
+           SOS active!
           </b-btn>
         </b-row>
       </b-col>
@@ -268,7 +269,7 @@
               </b-form-group>
             </b-col>
 
-            <b-col md="6" v-if="booking.range.start <= new Date()">
+            <b-col md="6" v-if="booking.range.start <= $moment().toDate()">
               <b-form-group label="Key card" label-for="code">
                 <b-form-input
                   v-for="booking_key in booking_keys"
@@ -346,8 +347,8 @@ export default {
       allBookings: {},
       booking: {
         range: {
-          start: new Date(),
-          end: new Date(),
+          start: this.$moment().startOf("day").toDate(),
+          end: this.$moment().startOf("day").add(2, "days").toDate(),
         },
       },
       booking_keys: [{ code: "", id: -1 }],
@@ -372,7 +373,6 @@ export default {
   },
   methods: {
     addKey() {
-      console.log('check')
       axiMara
         .get("keyCheck", {
           params: {
@@ -465,9 +465,7 @@ export default {
     },
     createBooking: function() {
       this.booking_keys.pop();
-      this.booking.range.end = this.booking.range.end.setDate(
-        this.booking.range.end.getDate() - 1
-      );
+      this.booking.range.end = this.$moment(this.booking.range.end).startOf("day").subtract(1, "days").toDate();
       axiMara
         .post("bookings/create", {
           params: {
@@ -477,8 +475,8 @@ export default {
           },
         })
         .then((response) => {
-          this.booking.range.start = new Date();
-          this.booking.range.end = new Date();
+          this.booking.range.start = this.$moment().startOf("day").toDate();
+          this.booking.range.end = this.$moment().startOf("day").add(2, "days").toDate();
           this.booking.firstname = "";
           this.booking.lastname = "";
           this.booking_keys = [{ code: "", id: -1 }];
@@ -525,7 +523,6 @@ export default {
         })
         .then((response) => {
           if (response.data.success) {
-            console.log(response.data)
             this.activeKeys = response.data.data;
           }
         });

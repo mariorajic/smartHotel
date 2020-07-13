@@ -24,9 +24,9 @@
                     </b-form-group>
 
                     <div class="form-help d-flex justify-content-between">
-                        <b-link>
-                            Prijava
-                        </b-link>
+                        <router-link to="login">
+                            Prijavi se
+                        </router-link>
                         <b-link>
                             Pomoć
                         </b-link>

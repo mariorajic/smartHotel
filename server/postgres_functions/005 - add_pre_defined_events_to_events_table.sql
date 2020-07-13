@@ -7,5 +7,5 @@ VALUES
 (301, 'Door closed', false, NOW(), NOW()),
 (500, 'Window opened', false, NOW(), NOW()),
 (501, 'Window closed', false, NOW(), NOW()),
-(700, 'SOS activated', false, NOW(), NOW()),
+(700, 'SOS activated', true, NOW(), NOW()),
 (701, 'SOS deactivated', false, NOW(), NOW());

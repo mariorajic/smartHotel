@@ -111,7 +111,7 @@
           </b-col>
           <b-col cols="2">
             <b-button
-              @click="sosChecked(sosEvent.id)"
+              @click="sosChecked(sosEvent)"
               size="sm"
               variant="success"
               >Check</b-button
@@ -129,9 +129,9 @@ export default {
   created() {
     let self = this;
     this.getSosEvents();
-    // this.interval = setInterval(function() {
-    //   self.getSosEvents();
-    // }, 2000);
+    this.interval = setInterval(function() {
+      self.getSosEvents();
+    }, 2000);
   },
   data() {
     return {
@@ -154,7 +154,8 @@ export default {
       this.$router.push("/auth/login");
     },
     getSosEvents() {
-      axiMara.get("events/sos").then((response) => {
+      if(this.$store.getters.isAuth){
+        axiMara.get("events/sos").then((response) => {
         if (response.status === 200) {
           this.sosEvents = response.data.data;
           if (this.sosEvents.length > 0) {
@@ -164,12 +165,14 @@ export default {
           }
         }
       });
+      }
+      
     },
     sosChecked(payload) {
       axiMara
         .post("events/sosCheck", {
-          event_id: payload,
-          timestamp: Date.now(),
+          payload: payload,
+          timestamp: this.$moment().startOf("day").toDate(),
         })
         .then((response) => {
           if (response.data.success) {
