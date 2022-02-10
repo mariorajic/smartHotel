@@ -12,7 +12,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.13",
     "bootswatch": "^4.3.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "perfect-scrollbar": "^1.4.0",
     "portal-vue": "^2.1.4",
     "v-calendar": "^0.9.7",
